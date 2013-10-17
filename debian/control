@@ -1,0 +1,16 @@
+Source: libapache2-mod-ntraffic
+Priority: extra
+Maintainer: Massimo Cetra <devel@navynet.it>
+Build-Depends: debhelper (>= 6), apache2-prefork-dev (>= 2.2.3) | apache2-threaded-dev (>= 2.2.3)
+Standards-Version: 3.8.0
+Section: web
+
+Package: libapache2-mod-ntraffic
+Architecture: any
+Depends: ${misc:Depends}, apache2.2-common
+Description:  module to log vhosts traffic for apache2
+    This module logs vhosts traffic in a mrtg suitable format.
+    It's easy to read the sent bytes, received bytes and the
+    hits for any vhost if you install this module.
+
+

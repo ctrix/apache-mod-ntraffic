@@ -1,0 +1,76 @@
+#!/usr/bin/perl
+
+#
+# Interface for apache mod_traffic and Navynet Nanemon (navynet network monitor)
+# (http://www.navynet.it/prodotti.php?Content=nanemon)
+#
+# Copyright 2005 by Massimo Cetra <devel@navynet.it>.  All rights reserved.
+#
+
+use strict;
+
+my $dirfiles="/var/spool/apache/mod_traffic/";
+
+#*******************************************
+#*******************************************  DON'T EDIT BELOW HERE
+#*******************************************
+
+my $par=@ARGV[0];
+my $val=@ARGV[1];
+
+if ($par eq "--help") {
+    ShowHelp();
+    exit;
+} elsif ( $par eq "-V" ) {
+    ParseVhostData($val);
+} else {
+    print "ST ER Argument -V not specified. Please check.\n";
+}
+
+
+#********************************************
+sub ShowHelp() {
+
+print qq~Plugin Informations:
+c_apache v.1.0
+Navynet S.r.l. 2005 info\@navynet.it
+Measures traffic by vhost - Requires mod_max
+[-V|*text|Virtual Host|||]
+ST OK Done
+~;
+
+
+}
+#********************************************
+
+sub ParseVhostData() {
+    my ($vhost)=@_;
+    my $line;
+
+    if ( $vhost eq "") {
+	print "ST ER Argument not specified. Please check your virtual host.\n";
+	return;
+    }
+
+    my $file="$dirfiles".$vhost.".data";
+
+    if ( ! -f $file ) {
+	print "ST ER No data found for virtual host. Cannot open data file.\n";
+	return;
+    }
+
+    open (FILE,$file);
+    $line=<FILE>;
+    close(FILE);
+
+    my ($sent,$rec,$hits)=split(" ",$line);
+
+    print "VA outBytes $sent int\n";
+    print "VA inBytes $rec int\n";
+    print "VA hits $hits int\n";
+    print "TY INC\n";
+    print "ST OK \n";
+
+}
+
+1;

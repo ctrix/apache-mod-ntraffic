@@ -1,0 +1,5 @@
+.libs/mod_ntraffic.so	usr/lib/apache2/modules
+ntraffic.load		etc/apache2/mods-available
+ntraffic.conf		etc/apache2/mods-available
+README.md		usr/share/doc/libapache2-mod-ntraffic
+LICENSE			usr/share/doc/libapache2-mod-ntraffic

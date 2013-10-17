@@ -1,0 +1,16 @@
+debian/files
+debian/libapache2-mod-ntraffic/
+debian/tmp/
+debian/files
+debian/*.log
+debian/*.debhelper
+debian/*.substvars
+
+.libs/
+build-stamp
+
+do_indent.sh
+
+*.la
+*.lo
+*.slo
