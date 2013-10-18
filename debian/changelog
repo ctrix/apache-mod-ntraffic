@@ -3,7 +3,7 @@ libapache2-mod-ntraffic (0.6-1) unstable; urgency=low
   * New upstream version
   * Support for Apache 2.4
 
- -- Massimo Cetra <mcetra@gmail.com>  Fri, 178Oct 2013 01:22:00 +0200
+ -- Massimo Cetra <mcetra@gmail.com>  Fri, 18 Oct 2013 01:22:00 +0200
 
 libapache2-mod-ntraffic (0.5-1) unstable; urgency=low
 
