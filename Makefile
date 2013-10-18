@@ -9,12 +9,12 @@ all: mod_ntraffic.so
 
 #   compile the DSO file
 mod_ntraffic.so: mod_ntraffic.c shm_pool.c
-	$(APXS) $(APXS_OPTS) -n 'mod_ntraffic' -c $(DEF) $(INC) $(LIB) mod_ntraffic.c shm_pool.c
+	$(APXS) $(APXS_OPTS) -n 'ntraffic' -c $(DEF) $(INC) $(LIB) mod_ntraffic.c shm_pool.c
 
 #   install the DSO file into the Apache installation
 #   and activate it in the Apache configuration
 install: all
-	$(APXS) -n 'mod_ntraffic' -i -a mod_ntraffic.so
+	$(APXS) -n 'ntraffic' -i -a .libs/mod_ntraffic.so
 
 #   cleanup
 clean:
