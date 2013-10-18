@@ -5,7 +5,7 @@
 # Then creates (on STDOUT) a simple configuration template
 # for MRTG
 #
-# Copyright 2005 by Massimo Cetra <devel@navynet.it>.  All rights reserved.
+# Copyright 2005 by Massimo Cetra <mcetra@gmail.com>.  All rights reserved.
 #
 
 my $CONFDIR="/etc/apache";	# Directory where httpd.conf is located

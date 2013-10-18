@@ -1,6 +1,6 @@
 Source: libapache2-mod-ntraffic
 Priority: extra
-Maintainer: Massimo Cetra <devel@navynet.it>
+Maintainer: Massimo Cetra <mcetra@gmail.com>
 Build-Depends: debhelper (>= 6), apache2-prefork-dev (>= 2.2.3) | apache2-threaded-dev (>= 2.2.3) | apache2-dev (>=2.4.0)
 Standards-Version: 3.8.0
 Section: web

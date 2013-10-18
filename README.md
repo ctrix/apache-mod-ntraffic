@@ -95,7 +95,7 @@ from an IP inside an allowed network (see the Allow directive in the example abo
 ```XML
 <document type="ntraffic/xml">
     <ntraffic-data>
-        <vhost name="guendalinux.navynet.it" hits="74" sent="17734" recvd="15019" />
+        <vhost name="www.test.it" hits="74" sent="17734" recvd="15019" />
     </ntraffic-data>
 </document>
 

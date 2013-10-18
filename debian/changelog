@@ -3,7 +3,7 @@ libapache2-mod-ntraffic (0.6-1) unstable; urgency=low
   * New upstream version
   * Support for Apache 2.4
 
- -- Massimo Cetra <devel@navynet.it>  Fri, 178Oct 2013 01:22:00 +0200
+ -- Massimo Cetra <mcetra@gmail.com>  Fri, 178Oct 2013 01:22:00 +0200
 
 libapache2-mod-ntraffic (0.5-1) unstable; urgency=low
 
@@ -11,7 +11,7 @@ libapache2-mod-ntraffic (0.5-1) unstable; urgency=low
   * Add JSON to the output formats
   * Avoid data files for inexistent virtual hosts
 
- -- Massimo Cetra <devel@navynet.it>  Thu, 17 Oct 2013 01:40:00 +0200
+ -- Massimo Cetra <mcetra@gmail.com>  Thu, 17 Oct 2013 01:40:00 +0200
 
 libapache2-mod-ntraffic (0.4-1) unstable; urgency=low
 
@@ -19,22 +19,22 @@ libapache2-mod-ntraffic (0.4-1) unstable; urgency=low
   * Don't update our stats when we call our handler
   * Add flush option to ntraffic-status handler
 
- -- Massimo Cetra <devel@navynet.it>  Thu, 15 Aug 2008 01:40:00 +0200
+ -- Massimo Cetra <mcetra@gmail.com>  Thu, 15 Aug 2008 01:40:00 +0200
 
 libapache2-mod-ntraffic (0.3-1) unstable; urgency=low
 
   * Added options "globals" and "plain" to ntraffic-status handler
 
- -- Massimo Cetra <devel@navynet.it>  Thu, 14 Aug 2008 18:00:17 +0200
+ -- Massimo Cetra <mcetra@gmail.com>  Thu, 14 Aug 2008 18:00:17 +0200
 
 libapache2-mod-ntraffic (0.2-1) unstable; urgency=low
 
   * Adds support for "/ntraffic-status" handler
 
- -- Massimo Cetra <devel@navynet.it>  Thu, 14 Aug 2008 15:43:17 +0200
+ -- Massimo Cetra <mcetra@gmail.com>  Thu, 14 Aug 2008 15:43:17 +0200
 
 libapache2-mod-ntraffic (0.1-1) unstable; urgency=low
 
   * Initial release
 
- -- Massimo Cetra <devel@navynet.it>  Thu, 14 Aug 2008 11:53:27 +0200
+ -- Massimo Cetra <mcetra@gmail.com>  Thu, 14 Aug 2008 11:53:27 +0200

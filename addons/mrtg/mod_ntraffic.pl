@@ -3,7 +3,7 @@
 #
 # Interface for apache mod_traffic and mrtg.
 #
-# Copyright 2005 by Massimo Cetra <devel@navynet.it>.  All rights reserved.
+# Copyright 2005 by Massimo Cetra <mcetra@gmail.com>.  All rights reserved.
 #
 
 use strict;
