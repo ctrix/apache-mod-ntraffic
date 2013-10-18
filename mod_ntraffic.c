@@ -1,6 +1,28 @@
-
-/**
- *  TODO: null
+/*
+ * mod_ntraffic - Traffic statistics collector for Apache
+ *
+ * Copyright (C) 2008-2013, Massimo Cetra <massimo.cetra at gmail.com>
+ *
+ * Version: MPL 2
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is mod_ntraffic
+ *
+ * The Initial Developer of the Original Code is
+ * Massimo Cetra <massimo.cetra at gmail.com>
+ *
+ * Portions created by the Initial Developer are Copyright (C)
+ * the Initial Developer. All Rights Reserved.
+ *
  */
 
 #include "mod_ntraffic.h"
@@ -274,7 +296,7 @@ static uint32_t BytesSent(request_rec * r) {
     reqtime = r->request_time;
     apr_rfc822_date(datestring, reqtime);
     date_len = strlen(datestring) + strlen("Date: ") + 2;
-    serverver_len = strlen(ap_get_server_version()) + strlen("Server: ") + 2;
+    serverver_len = strlen(ap_get_server_banner()) + strlen("Server: ") + 2;
 
     sent = TableLen(r, r->headers_out) + TableLen(r, r->err_headers_out) + status_len + serverver_len + date_len + 2;   // 2 for CRLF
 
@@ -317,7 +339,12 @@ static int checkexclude(request_rec * r, apr_array_header_t * a) {
     ips = (iplist *) a->elts;
 
     for (i = 0; i < a->nelts; ++i) {
+
+#if AP_SERVER_MINORVERSION_NUMBER == 2
         if (apr_ipsubnet_test(ips[i].ips, r->connection->remote_addr)) {
+#elif AP_SERVER_MINORVERSION_NUMBER == 4
+        if (apr_ipsubnet_test(ips[i].ips, r->connection->client_addr)) {
+#endif
             return 1;
         }
     }
@@ -834,6 +861,7 @@ static int ntraffic_init(apr_pool_t * p, apr_pool_t * plog, apr_pool_t * ptemp, 
     traffic_data_t *totals;
     ntraffic_config_t *conf;
     apr_pool_t *newpool;
+    char *tmpfile;
 
     /* Init APR's atomic functions */
     status = apr_atomic_init(p);
@@ -870,7 +898,9 @@ static int ntraffic_init(apr_pool_t * p, apr_pool_t * plog, apr_pool_t * ptemp, 
     }
 
     /* The global mutex stuff */
-    tmpnam(data_lock_name);
+    tmpfile = tmpnam(data_lock_name);
+    (void) tmpfile; /* shutup picky compilers */
+
     status = apr_global_mutex_create(&data_lock, data_lock_name, APR_LOCK_DEFAULT, p);
     if (status != APR_SUCCESS) {
         ap_log_error(APLOG_MARK, APLOG_CRIT, status, s, MODULE_NAME " Cannot initialize data lock");
@@ -878,8 +908,14 @@ static int ntraffic_init(apr_pool_t * p, apr_pool_t * plog, apr_pool_t * ptemp, 
     }
     //apr_pool_cleanup_register(p, data_lock, (void*)apr_global_mutex_destroy, apr_pool_cleanup_null) ;
     apr_pool_cleanup_register(p, data_lock, cleanup_mutex, apr_pool_cleanup_null);
+
 #ifdef AP_NEED_SET_MUTEX_PERMS
+
+#if AP_SERVER_MINORVERSION_NUMBER == 2
     status = unixd_set_global_mutex_perms(data_lock);
+#elif AP_SERVER_MINORVERSION_NUMBER == 4
+    status = ap_unixd_set_global_mutex_perms(data_lock);
+#endif
     if (status != APR_SUCCESS) {
         ap_log_error(APLOG_MARK, APLOG_CRIT, status, s,
                      "Parent could not set permissions on global mutex:" " check User and Group directives");
